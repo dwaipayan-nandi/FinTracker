@@ -97,7 +97,43 @@ function ExpenseForm() {
     <div>
       <h2>Add Expense</h2>
       <form onSubmit={handleSubmit}>
-        {/* ... (existing form elements) */}
+        <div>
+          <label htmlFor="category">Category:</label>
+          <select
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          >
+            <option value="">Select a category</option>
+            <option value="Groceries">Groceries</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Dining Out">Dining Out</option>
+            {/* Add more options as needed */}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="itemName">Item Name:</label>
+          <input
+            type="text"
+            id="itemName"
+            value={itemName}
+            onChange={(e) => setItemName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="amount">Amount:</label>
+          <input
+            type="number"
+            id="amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Add Expense</button>
       </form>
       {message && <p>{message}</p>}
 
