@@ -1,16 +1,24 @@
-// src/components/ExpenseList.js
+import React, { useState } from 'react';
 
-import React from 'react';
 
 function ExpenseList({ expenses }) {
+  const itemsPerPage = 7; // Define the number of expenses to show per page
+  const [currentPage, setCurrentPage] = useState(1);
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return date.toISOString().split('T')[0];
   };
 
-  // Reversing the expenses array to display newer entries at the top
   const reversedExpenses = expenses.slice().reverse();
 
+  const indexOfLastExpense = currentPage * itemsPerPage;
+  const indexOfFirstExpense = indexOfLastExpense - itemsPerPage;
+  const currentExpenses = reversedExpenses.slice(indexOfFirstExpense, indexOfLastExpense);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <div class="relative overflow-x-auto  shadow-md sm:rounded-lg">
       <p class='text-center font-sans text-xl mb-3  font-semibold text-white'>Expense List</p>
@@ -24,7 +32,7 @@ function ExpenseList({ expenses }) {
           </tr>
         </thead>
         <tbody>
-          {reversedExpenses.map((expense) => (
+          {currentExpenses.map((expense) => (
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={expense.id}>
               <td class="px-6 py-4 text-center text-white ">{formatDate(expense.entry_date)}</td>
               <td class="px-6 py-4 text-center text-white">{expense.category}</td>
@@ -34,6 +42,21 @@ function ExpenseList({ expenses }) {
           ))}
         </tbody>
       </table>
+
+      <div className="flex justify-center mt-4">
+        {Array.from({ length: Math.ceil(reversedExpenses.length / itemsPerPage) }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => paginate(index + 1)}
+            className={`px-3 py-2 mx-1 font-semibold text-white ${
+              currentPage === index + 1 ? 'bg-gray-600' : 'bg-gray-400 hover:bg-gray-600'
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>      
+
     </div>
   );
 }

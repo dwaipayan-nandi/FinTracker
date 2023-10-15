@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom"; // Import the Link component
 import * as Components from './Components';
 import './RegistrationForm'
 import RegistrationForm from "./RegistrationForm";
 
 function LoginForm({ history }) {
-  const [signIn, toggle] = React.useState(true);
+  const [signIn] = React.useState(true);
 
-  const navigate = useNavigate();
+  
   const [userData, setUserData] = useState({
     username: "",
     password: "",
@@ -47,7 +46,7 @@ function LoginForm({ history }) {
       handleSuccessfulLogin();
       history.push("/");
     } catch (error) {
-      if (error.response && error.response.status === 404) {
+      if (error.response && error.response.status === 401) {
         // If user is not found (status code 404), set the error message
         setErrorMessage(
           "User not registered. Please register before logging in."
@@ -60,6 +59,7 @@ function LoginForm({ history }) {
 
   return (
     <Components.Container>
+    
               <RegistrationForm/>
               <Components.SignInContainer signinIn={signIn}>
                    <Components.Form onSubmit={handleSubmit}>
@@ -70,9 +70,12 @@ function LoginForm({ history }) {
                        <Components.Input type='password' placeholder='Password' name="password" value={userData.password}
             onChange={handleChange}
             required/>
+            {errorMessage && <p>{errorMessage}</p>}
                        <Components.Button type='submit'>Login</Components.Button>
+                       
                    </Components.Form>
               </Components.SignInContainer>
+             
 
           </Components.Container>
   );
