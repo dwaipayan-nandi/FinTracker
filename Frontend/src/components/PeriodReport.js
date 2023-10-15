@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ExpenseList from './ExpenseList';
+import Navbar from '../modules/Navbar';
 
 function DateRangeFilter() {
   const [fromDate, setFromDate] = useState('');
@@ -105,49 +106,59 @@ function DateRangeFilter() {
   
 
   return (
-    <div>
-      <h1>Date Range Filter</h1>
-      <div>
-        {/* From Date input field */}
-        <label>From Date (YYYY-MM-DD):</label>
-        <input
-          type="text"
-          value={fromDate}
-          onChange={handleFromDateChange}
-          placeholder="Enter From Date"
-        />
-      </div>
-      <div>
-        {/* To Date input field */}
-        <label>To Date (YYYY-MM-DD):</label>
-        <input
-          type="text"
-          value={toDate}
-          onChange={handleToDateChange}
-          placeholder="Enter To Date"
-        />
-      </div>
-      <div>
-        <button onClick={handleLast1MonthClick}>Last 1 Month</button>
-        <button onClick={handleLast2MonthsClick}>Last 2 Months</button>
-        <button onClick={handleFetchEntriesClick}>Fetch Entries</button>
-      </div>
-      {/* Display the fetched entries or a message if no entries */}
+    <>
+    <div class='w-screen h-screen bg-gradient-to-r from-blue-800 to-neutral-800'>
+    <div class='grid grid-rows-3 grid-cols-2 grid-flow-row justify-items-stretch'>
+    <div class='col-span-2'><Navbar/></div>
+    <div class='justify-self-center row-span-2'>
       {entries.length > 0 ? (
           <>
-            <h2>Entries for the Selected Date Range</h2>
+            <p class='text-center font-sans text-xl font-semibold text-white mb-5'>Entries for the Selected Date Range!</p>
             <ul>
               <ExpenseList expenses={entries} />
             </ul>
           </>
         ) : (
-          <p>No entries found for the selected date range.</p>
+          <p class='text-center font-sans text-xl font-semibold text-red-600 mb-5'>No entries found for the selected date range!</p>
         )}
-      <div>
+        <div>
         {/* Display the total amount */}
-        <h2>Total Amount Spent: ₹{totalAmount.toFixed(2)}</h2>
+        <p class='text-center font-sans text-xl font-semibold text-white'>Total Amount Spent: ₹{totalAmount.toFixed(2)}</p>
       </div>
+        </div>   
+    <div class='justify-self-center mt-2'> <p class='text-center font-sans text-xl font-semibold pb-3 text-white'>Date Range Filter</p>
+    <div>
+    <div class='ml-12'><label for="fromdate" class="block mb-2 text-l font-medium text-gray-900 dark:text-white">From Date:</label>
+    <input
+          type="text"
+	        id ="fromdate"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          value={fromDate}
+          onChange={handleFromDateChange}
+          placeholder="Enter From Date"
+        /></div>
+        <div class='ml-12'>
+        {/* To Date input field */}
+        <label for="todate" class="block mb-2 text-l font-medium text-gray-900 pt-2 dark:text-white">To Date :</label>
+        <input
+          type="text"
+          id="todate"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          value={toDate}
+          onChange={handleToDateChange}
+          placeholder="Enter To Date"
+        />
+      </div>
+      <div class='mt-5 ml-12'>
+        <button class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-4 mb-2" onClick={handleLast1MonthClick}>Last 1 Month</button>
+        <button class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-4 mb-2" onClick={handleLast2MonthsClick}>Last 2 Months</button>
+      </div>
+      <div class="mt-4 ml-32"><button class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onClick={handleFetchEntriesClick}>Fetch Entries</button></div>
     </div>
+    </div>
+    </div>
+    </div>
+    </>
   );
 }
 

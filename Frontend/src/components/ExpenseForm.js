@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ExpenseList from './ExpenseList';
+import Navbar from '../modules/Navbar';
 
 function ExpenseForm() {
   const [category, setCategory] = useState('');
@@ -80,7 +81,7 @@ function ExpenseForm() {
 
       console.log('Expense added:', response.data);
       // Display a success message
-      setMessage('Expense added successfully');
+      setMessage('Expense added successfully!');
 
       // Clear the input fields after successful submission
       setCategory('');
@@ -94,29 +95,33 @@ function ExpenseForm() {
   };
 
   return (
-    <div>
-      <h2>Add Expense</h2>
+    <>
+    <div class='grid grid-rows-5 justify-stretch w-screen h-screen grid-cols-2 grid-flow-row justify-items-stretch bg-gradient-to-r from-blue-800 to-neutral-800'>
+      <div class='col-span-2'><Navbar/></div>
+      <div class='justify-self-center row-span-2 mb-7'><ExpenseList expenses={expenses} /></div>
+      <div class='justify-self-center row-span-2 mb-7'> <p class='text-center font-sans text-xl font-semibold text-white'>Add Expense</p>
+      
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="category">Category:</label>
-          <select
-            id="category"
+        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category:</label>
+<select id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            required
-          >
-            <option value="">Select a category</option>
+            required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  <option value="">Select a category</option>
             <option value="Groceries">Groceries</option>
             <option value="Utilities">Utilities</option>
             <option value="Entertainment">Entertainment</option>
-            <option value="Dining Out">Dining Out</option>
+            <option value="Dining Out">Dining Out</option>  
+</select>
             {/* Add more options as needed */}
-          </select>
+
         </div>
         <div>
-          <label htmlFor="itemName">Item Name:</label>
+          <label for="itemName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Item Name:</label>
           <input
             type="text"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             id="itemName"
             value={itemName}
             onChange={(e) => setItemName(e.target.value)}
@@ -124,22 +129,24 @@ function ExpenseForm() {
           />
         </div>
         <div>
-          <label htmlFor="amount">Amount:</label>
+          <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount:</label>
           <input
             type="number"
             id="amount"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Add Expense</button>
+        <button type="submit"  class="w-full  text-white mt-5 bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Add Expense</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p class='text-center mt-2 font-sans font-semibold text-white'>{message}</p>}
 
-      <h2>Total Amount Spent Today: ₹{totalAmountToday.toFixed(2)}</h2>
-      <ExpenseList expenses={expenses} />
+      <p class='text-center mt-2 font-sans text-xl font-semibold text-white'>Total Amount Spent Today: ₹{totalAmountToday.toFixed(2)}</p>
+      </div>
     </div>
+    </>
   );
 }
 

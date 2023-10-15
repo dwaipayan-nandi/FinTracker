@@ -24,20 +24,10 @@ function App() {
     }
   }, []);
 
-  const handleLogout = () => {
-    
-    sessionStorage.removeItem('token');
-
- 
-    setIsAuthenticated(false);
-
-    
-    window.location.href = '/login';
-  };
 
   return (
     <Router>
-      <div className="App">
+      {/* <div className="App">
         <h1>Expense Tracker</h1>
         <nav>
           <ul>
@@ -51,7 +41,7 @@ function App() {
               <Link to="/daily-report">Daily Report</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
         <Routes>
           {/* Use PrivateRoute for protected routes */}
           <Route
@@ -70,10 +60,10 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
         </Routes>
         
-        {isAuthenticated && (
+        {/* {isAuthenticated && (
           <button onClick={handleLogout}>Logout</button>
-        )}
-      </div>
+        )} */}
+      {/* </div> */}
     </Router>
   );
 }

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import * as Components from './Components';
 
 function RegistrationForm() {
+  const [signIn, toggle] = React.useState(true);
   const [userData, setUserData] = useState({
-    username: '',
-    password: '',
+    usernamer: '',
+    passwordr: '',
   });
   const [error, setError] = useState('');
 
@@ -16,7 +18,6 @@ function RegistrationForm() {
       [name]: value,
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,36 +40,57 @@ function RegistrationForm() {
   };
 
   return (
-    <div>
-      <h2>Registration</h2>
-      {error && <p>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={userData.username}
+    
+<Components.Container>
+              <Components.SignUpContainer signinIn={signIn}>
+                  <Components.Form onSubmit={handleSubmit}>
+                  <h1 class="text-gray-800 font-bold text-2xl mb-1">Create Account!</h1>
+                      <Components.Input type='text' placeholder='Username' name='username' value={userData.username}
             onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={userData.password}
+            required/>
+                      <Components.Input type='password' placeholder='Password' name='password' value={userData.password}
             onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      <p>
-        Already have an account? <Link to="/login">Login here</Link>
-      </p>
-    </div>
+            required/>
+                      <Components.Button type='submit'>Sign Up</Components.Button>
+                  </Components.Form>
+              </Components.SignUpContainer>
+
+              <Components.OverlayContainer signinIn={signIn}>
+                  <Components.Overlay signinIn={signIn}>
+
+                  <Components.LeftOverlayPanel signinIn={signIn}>
+                      <h1 class="text-white font-bold text-4xl font-sans">FinTracker</h1>
+                        <div><br/></div>
+                        <p class="text-white mt-1">Already a member??</p>
+                        <div><br/></div>
+                        <div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+                      <Components.GhostButton onClick={() => toggle(true)}>
+                          Login Now!
+                      </Components.GhostButton>
+                      </Components.LeftOverlayPanel>
+
+                      <Components.RightOverlayPanel signinIn={signIn}>
+                      <h1 class="text-white font-bold text-4xl font-sans">FinTracker</h1>
+                        <div><br/></div>
+                        <p class="text-white mt-1">Don't have an account??</p>
+                        <div><br/></div>
+                        <div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+		<div class="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+                            <Components.GhostButton onClick={() => toggle(false)}>
+                                Join Now!
+                            </Components.GhostButton> 
+                      </Components.RightOverlayPanel>
+  
+                  </Components.Overlay>
+              </Components.OverlayContainer>
+
+          </Components.Container>
+
   );
 }
 
