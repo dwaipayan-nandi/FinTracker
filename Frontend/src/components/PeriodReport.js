@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ExpenseList from './ExpenseList';
 import Navbar from '../modules/Navbar';
+import './styles.css'
 
 function DateRangeFilter() {
   const [fromDate, setFromDate] = useState('');
@@ -108,7 +109,7 @@ function DateRangeFilter() {
   return (
     <>
     <div class='w-screen h-screen bg-gradient-to-r from-blue-800 to-neutral-800'>
-    <div class='grid grid-rows-3 grid-cols-2 grid-flow-row justify-items-stretch'>
+    <div class='grid custom-grid grid-rows-2 grid-cols-2 grid-flow-row justify-items-stretch'>
     <div class='col-span-2'><Navbar/></div>
     <div class='justify-self-center row-span-2'>
       {entries.length > 0 ? (

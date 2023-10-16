@@ -12,5 +12,10 @@ body {
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   height: 100vh;
-  margin: -20px 0 50px;
+  margin: 0;
+}
+
+.custom-grid {
+  max-height: 400px; /* Adjust the width as needed */
+  margin: 0 auto; /* Center the grid horizontally */
 }

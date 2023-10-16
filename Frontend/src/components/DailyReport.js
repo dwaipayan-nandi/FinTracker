@@ -55,11 +55,16 @@ function DailyReport() {
    <div class='grid grid-rows-2 grid-cols-2 grid-flow-row justify-items-stretch'>
     <div class='col-span-2'><Navbar/></div>
     <div class='justify-self-center'><div>
-        {/* Display the fetched entries */}
-        <p class='text-center font-semibold text-white'>Entries for {date}</p>
-        <ul>
-          <ExpenseList expenses={entries} />
-        </ul>
+        {entries.length > 0 ? (
+          <>
+            <p class='text-center font-sans text-xl font-semibold text-white mb-5'>Entries for the Selected Date Range!</p>
+            <ul>
+              <ExpenseList expenses={entries} />
+            </ul>
+          </>
+        ) : (
+          <p class='text-center font-sans text-xl font-semibold text-red-600 mb-5'>No entries found for the selected date range!</p>
+        )}
       </div>
       <div>
         {/* Display the total amount */}

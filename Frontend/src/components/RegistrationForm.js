@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import * as Components from './Components';
 
 function RegistrationForm() {
@@ -52,6 +51,7 @@ function RegistrationForm() {
             onChange={handleChange}
             required/>
                       <Components.Button type='submit'>Sign Up</Components.Button>
+                      {error && <p>{error}</p>}
                   </Components.Form>
               </Components.SignUpContainer>
 
@@ -59,6 +59,7 @@ function RegistrationForm() {
                   <Components.Overlay signinIn={signIn}>
 
                   <Components.LeftOverlayPanel signinIn={signIn}>
+                  
                       <h1 class="text-white font-bold text-4xl font-sans">FinTracker</h1>
                         <div><br/></div>
                         <p class="text-white mt-1">Already a member??</p>
