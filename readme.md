@@ -1,1 +1,1 @@
-modify the .env files in backend folder with own credentials and DB name
+modify the .env file in backend folder with own credentials and DB name
