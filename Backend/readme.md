@@ -18,4 +18,4 @@ CREATE TABLE financial_entries (
   amount decimal(10,2) NOT NULL,
   entry_date date default(CURRENT_DATE),
   PRIMARY KEY (id)
-)
+);
